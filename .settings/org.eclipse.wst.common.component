@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="Kirana_Store_With_GST">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <property name="context-root" value="Kirana_Store_With_GST"/>
+        <property name="java-output-path" value="/Kirana_Store_With_GST/build/classes"/>
+    </wb-module>
+</project-modules>
