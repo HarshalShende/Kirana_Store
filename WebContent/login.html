@@ -14,7 +14,7 @@
 		<!-- Navigation Bar Start -->
 		<nav class="navbar navbar navbar-expand-sm navbar-dark bg-dark p-0">
 			<div class="container-fluid">
-				<h1><a href="#" class="navbar-brand font-weight-bold"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Kirana Store</a></h1>
+				<h1><a href="#" class="navbar-brand font-weight-bold"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Kirana Store With GST</a></h1>
 			</div>
 		</nav>
 		<!-- Navigation Bar End -->
@@ -24,10 +24,10 @@
 			<br><br>
 			<ul class="nav-tabs nav justify-content-center border-white">
 				<li class="nav-item">
-					<a href="#adminlogin" class="nav-link text-dark active bg-warning" data-toggle="tab">Admin Login</a>
+					<a href="#adminlogin" class="nav-link text-white active bg-primary" data-toggle="tab">Admin Login</a>
 				</li>
 				<li class="nav-item">
-					<a href="#cashierlogin" class="nav-link text-dark bg-warning" data-toggle="tab">Cashier Login</a>
+					<a href="#cashierlogin" class="nav-link text-white bg-primary" data-toggle="tab">Cashier Login</a>
 				</li>
 			</ul>
 			<div class="tab-content container">
@@ -38,7 +38,7 @@
 					<h3 class="text-primary">Admin Login Form</h3>
 					<br>
 					<div class="container col-lg-5">
-						<form class="">
+						<form action="AdminLogin.jsp" method="get">
 							<div class="form-group">
 								<label><i class="fa fa-user fa-2x"></i>&nbsp;Username</label>
 								<input type="text" name="aname" class="form-control">
@@ -51,7 +51,7 @@
 								<button class="btn btn-primary btn-outline-success text-white" type="submit" >Login</button>
 							</div>
 							<div>
-								<a href="newRegistration.html">New Registration</a>&nbsp;&nbsp;
+								<a href="testbefreg.jsp">New Registration</a>&nbsp;&nbsp;
 								<a class="text-primary"  data-target="#forgotpassmodal" data-toggle="modal">Forgot Password</a>
 							</div>
 						</form>

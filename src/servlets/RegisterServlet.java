@@ -3,11 +3,10 @@ package servlets;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.PreparedStatement;
 
 
 @WebServlet("/RegisterServlet")
@@ -52,13 +54,24 @@ public class RegisterServlet extends HttpServlet {
 		String pass = "";
 		 
 		Connection con = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con=(Connection) DriverManager.getConnection(connectionURL, user, pass);
+			Statement st=con.createStatement();
+			ResultSet rs=st.executeQuery("select * from users where role='admin'");
+			if(rs.next()) {
+				RequestDispatcher rd=req.getRequestDispatcher("login.html");
+				rd.forward(req, res);
+			}
+		}catch(SQLException | ClassNotFoundException e) {e.printStackTrace();} 
 		 
 		try{
 		    Class.forName("com.mysql.jdbc.Driver");
-		    con = DriverManager.getConnection(connectionURL, user, pass);
-		    PreparedStatement pst=con.prepareStatement
+		    con = (Connection) DriverManager.getConnection(connectionURL, user, pass);
+		    PreparedStatement pst=(PreparedStatement) con.prepareStatement
 		    		("insert into users(fname,mname,lname,email,phono,username,password,secquestion,secanswer,role,image)"
-		    				+ "values(?,?,?,?,?,?,?,?,?,?,?)");
+		    				+ "values(?,?,?,?,?,?,?,?,?,'admin',?)");
 		    pst.setString(1, fname);
 		    pst.setString(2, mname);
 		    pst.setString(3, lname);
@@ -68,8 +81,7 @@ public class RegisterServlet extends HttpServlet {
 		    pst.setString(7, password);
 		    pst.setString(8, secquestion);
 		    pst.setString(9, secanswer);
-		    pst.setString(10, role);
-		    pst.setBlob(11, is);
+		    pst.setBlob(10, is);
 		    
 		    int k=pst.executeUpdate();
 		    if(k==0) {
