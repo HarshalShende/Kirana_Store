@@ -26,7 +26,9 @@ try {
 	PrintWriter pw=response.getWriter();
 	response.setContentType("text/html");
 	if(rs.next()){
-		response.sendRedirect("AdminPanelHome.html");
+		session.setAttribute("name", rs.getString(2)+" "+rs.getString(3)+" "+rs.getString(4));
+		RequestDispatcher rd=request.getRequestDispatcher("adminHome.jsp");
+		rd.forward(request,response);
 	}
 	else{
 		RequestDispatcher rd=request.getRequestDispatcher("login.html");
@@ -34,7 +36,6 @@ try {
 		pw.println("<script type=\"text/javascript\">");
 	    pw.println("alert('Username Or Password Is Wrong');");
 		pw.println("</script>");
-		
 	}
 	con.close();
 %>
