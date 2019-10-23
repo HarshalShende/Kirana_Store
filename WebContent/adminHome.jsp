@@ -27,7 +27,7 @@
                     <i class="fa fa-power-off"></i>
                     </button>
                     <div class="dropdown-menu">
-                        <li><a href="#"><i class="fa fa-sign-out-alt fa-fw"></i> Logout</a></li>
+                        <li><a href="logout.jsp"><i class="fa fa-sign-out-alt fa-fw"></i> Logout</a></li>
                     </div>
                 </div>
                 
@@ -95,7 +95,12 @@
             <div id="content">
                 
                 <div class="container-fluid">
-                    <h4 class="text-primary page-item"><i class="fa fa-user"></i> Welcome Admin <strong class="text-danger"><%= session.getAttribute("name")%></strong></h4>
+                    <h4 class="text-primary page-item">
+                    <img src="getAdminImage.jsp" class="rounded-circle rounded" alt="Admin Picture" height="65" width="65px">
+                    &nbsp;&nbsp; Welcome Admin &nbsp;&nbsp;
+                    <strong class="text-danger text-center"><%= session.getAttribute("name")%></strong> 
+                    </h4>
+                    <br><br>
                     <div id="orayt">
                         <a class="list-group-item">
                            <font style = 'color:black;'>Total Sales For Today:  </font>
