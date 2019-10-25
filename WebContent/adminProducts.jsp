@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
@@ -98,6 +99,8 @@
                     </li>
                 </ul>
             </nav>
+            
+            
             <!-- Page Content  -->
             <div id="content">
                 
@@ -167,16 +170,24 @@
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 </div>
 <div class="modal-body">
-<form action="saveproduct.php" method="post" class = "form-group" >
+<form action="addProducts.jsp" method="post" class = "form-group" >
     <div id="ac">
         <span>Category: </span>
         <select name="categ" class = "form-control" >
-            <option>Select Category</option>
-            <option>Noodles</option>
-            <option>Canned Goods</option>
-            <option>Shampoo</option>
-            <option>Bath Soap</option>
-            <option>Crackers</option>
+            <%
+            String connectionURL = "jdbc:mysql://localhost:3306/kiranastore";
+            String user = "root";
+            String pass = "";
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con=DriverManager.getConnection(connectionURL, user, pass);
+            Statement st=con.createStatement();
+            ResultSet rs=st.executeQuery("select * from categories");
+            while(rs.next()){
+            %>
+            <option><%= rs.getString(2) %></option>
+            <%
+            }
+            %>
         </select>
         <span>Product Code : </span><input type="text" name="code" value = "P-23300" class = "form-control" />
         <span>Brand Name : </span><input type="text" name="bname" class = "form-control" />
@@ -200,6 +211,7 @@
         <span>Expiration Date: </span><input type="date" name="ex_date" class = "form-control" />
         <span>&nbsp;</span><input class="btn btn-primary btn-block" type="submit" class = "form-control" value="Save" />
     </div>
+    </form>
 </div>
 <div class="modal-footer">
 </div>
@@ -211,6 +223,8 @@
 <!-- modal end  -->
 
 
+
+ <!-- Add Category Modal -->
 <div class="modal fade" id="addCatModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog">
 <div class="modal-content">
@@ -219,13 +233,14 @@
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 </div>
 <div class="modal-body">
-    <form action="addcategory.jsp" method="post" class = "form-group" >
+    <form action="addCategory.jsp" method="post" class = "form-group" >
         <div id="ac">
             <span>Category : </span>
             <input type="text" name="category" class = "form-control" />
             <span>&nbsp;</span>
             <input class="btn btn-primary btn-block" type="submit" class ="form-control" value="Save" />
         </div>
+    </form>
     </div>
     
     <div class="modal-footer">
@@ -237,6 +252,9 @@
 </div>
 <!-- Modal -->
 <!-- modal end  -->
+
+
+
 <!-- jQuery CDN - Slim version (=without AJAX) -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <!-- Popper.JS -->

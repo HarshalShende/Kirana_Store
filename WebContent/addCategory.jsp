@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@page import="java.sql.*" %>
 <%@page import="java.io.*" %>
-<%@page import="dao.DbConnection" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,10 +12,14 @@
 <body>
 
 <%
+String connectionURL = "jdbc:mysql://localhost:3306/kiranastore";
+String user = "root";
+String pass = "";
+Class.forName("com.mysql.jdbc.Driver");
+Connection con=DriverManager.getConnection(connectionURL, user, pass);
 
 String category=request.getParameter("category");
-Connection con = DbConnection.getCon();
-PreparedStatement ps=con.prepareStatement("insert into category(category) values('?')");
+PreparedStatement ps=con.prepareStatement("insert into categories(category) values(?)");
 ps.setString(1, category);
 int k=ps.executeUpdate();
 if(k!=0){
@@ -23,7 +27,7 @@ if(k!=0){
 	RequestDispatcher rd=request.getRequestDispatcher("adminProducts.jsp");
 	rd.include(request,response);
 	pw.println("<script type=\"text/javascript\">");
-    pw.println("alert('Category Added');");
+    pw.println("confirm('Category Added');");
 	pw.println("</script>");
 }
 else{
@@ -31,7 +35,7 @@ else{
 	RequestDispatcher rd=request.getRequestDispatcher("adminProducts.jsp");
 	rd.include(request,response);
 	pw.println("<script type=\"text/javascript\">");
-    pw.println("alert('Category Not Added');");
+    pw.println("confirm('Category Not Added');");
 	pw.println("</script>");
 }
 %>
