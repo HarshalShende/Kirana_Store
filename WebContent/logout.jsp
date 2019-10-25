@@ -9,8 +9,8 @@
 <body>
 <%
 
-RequestDispatcher rd=request.getRequestDispatcher("login.html");
-rd.forward(request, response);
+session.removeAttribute("name");
+response.sendRedirect("login.html");
 
 %>
 </body>

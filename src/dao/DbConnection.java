@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class DbConnection{
 	public static Connection con;
-	String url="mysql:jdbc://localhost:3306/KiranaStore";
-	String username="root";
-	String password="";
+	String connectionURL = "jdbc:mysql://localhost:3306/kiranastore";
+	String user = "root";
+	String pass = "";
 	
 	public DbConnection() throws ClassNotFoundException {
 		try {
@@ -19,7 +19,7 @@ public class DbConnection{
 		}
 	}
 	
-	public Connection getCon() {
+	public static Connection getCon() {
 		return con;
 	}
 	

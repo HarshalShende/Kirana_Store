@@ -18,7 +18,7 @@ String aname=request.getParameter("aname");
 String apass=request.getParameter("apass");
 try {
 	Class.forName("com.mysql.jdbc.Driver");
-	con=DriverManager.getConnection(connectionURL,user,pass);
+	con=DriverManager.getConnection(connectionURL,user,pass); 
 	PreparedStatement ps=con.prepareStatement("select * from users where username=? and password=?");
 	ps.setString(1, aname);
 	ps.setString(2, apass);

@@ -45,12 +45,12 @@
                 </div>
                 <ul class="list-unstyled components">
                     <li class="">
-                        <a href="#">
+                        <a href="adminHome.jsp">
                             <i class="fas fa-home fa-fw"></i> Home
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="adminProducts.jsp">
                             <i class="fa fa-table fa-fw" ></i> Products
                         </a>
                     </li>
