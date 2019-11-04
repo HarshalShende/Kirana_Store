@@ -60,7 +60,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="adminSupplier.jsp">
                             <i class="fa fa-truck fa-fw" ></i> Supplier
                         </a>
                     </li>

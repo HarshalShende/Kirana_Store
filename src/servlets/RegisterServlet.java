@@ -29,6 +29,11 @@ public class RegisterServlet extends HttpServlet {
     }
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		String submit=req.getParameter("reg");
+		
+		if(submit=="submit") {
+			
+		
 		String fname=req.getParameter("fname");
 		String mname=req.getParameter("mname");
 		String lname=req.getParameter("lname");
@@ -95,8 +100,47 @@ public class RegisterServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+		else {
+			String name=req.getParameter("name");
+			String contact=req.getParameter("contact");
+			String address=req.getParameter("address");
+			Part image=req.getPart("image");
+			InputStream is =image.getInputStream();
 
-}
+			String connectionURL = "jdbc:mysql://localhost:3306/kiranastore";
+			String user = "root";
+			String pass = "";
+
+			try{
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection con=(Connection)DriverManager.getConnection(connectionURL, user, pass);
+				PreparedStatement pst=(PreparedStatement) con.prepareStatement
+			    		("insert into suppliers(name,contact,address,image)"
+			    				+ "values(?,?,?,?)");
+			    pst.setString(1, name);
+			    pst.setString(2, contact);
+			    pst.setString(3, address);
+			    pst.setBlob(4, is);
+			   
+			    int k=pst.executeUpdate();
+			    
+			PrintWriter out=res.getWriter(); 
+				res.setContentType("text/html");
+			    if(k==0) {
+			    	out.println("<h1>Error In Insertion</h1>");
+			    	
+			    }else {
+			    	out.println("<h1>User Registered Successfully</h1>");
+			    }
+			}
+
+		  catch(Exception e){ e.printStackTrace(); }
+
+		}
+
+		}
+	}
+	
 
 //CREATE TABLE users(
 //	    id INT(10) not null AUTO_INCREMENT,

@@ -68,7 +68,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="adminSupplier.jsp">
                             <i class="fa fa-truck fa-fw" ></i> Supplier
                         </a>
                     </li>
@@ -103,7 +103,27 @@
             
             <!-- Page Content  -->
             <div id="content">
-                
+              <!----------------------------------------->
+                <div class="row" style="text-align:right;">
+                    <div class="col-lg-4 col-sm-4">
+                        <div class="dataTables_length" id="dataTables-example_length">
+                            <label>Show entries</label>
+                            <select name="dataTables-example_length" aria-controls="dataTables-example" class="form-control input-sm">    <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-4" >
+                    <div id="dataTables-example_filter" class="dataTables_filter">
+                        <label>Search:</label>
+                        <input type="search" class="form-control input-sm" placeholder="" aria-controls="dataTables-example">
+                    </div>
+                </div>
+            </div><br>
+            <!----------------------------------------->
+            
                 <div class="container-fluid">
                     <h4 class="text-primary"><i class="fa fa-th-list fa-fw"></i> Product List</h4>
                     <button type="submit" class="btn btn-primary " data-target="#addProdModal" data-toggle="modal">
@@ -155,7 +175,7 @@
 
 </div>
 
-<a href="" onclick="window.print()" class="btn btn-primary"><i class="icon-print icon-large"></i> Print</a>
+<a href="" onclick="window.print()" class="btn btn-primary"><i class="fa fa-print"></i> Print</a>
                     <a href= "product_exp.php" class = "btn btn-primary">View Product Expiration</a>
                         <div class="clearfix"></div>
 
@@ -172,6 +192,9 @@
 <div class="modal-body">
 <form action="addProducts.jsp" method="post" class = "form-group" >
     <div id="ac">
+    
+    	<span>Product Code : </span><input type="text" name="code" value = "P-23300" class = "form-control" />
+    	
         <span>Category: </span>
         <select name="categ" class = "form-control" >
             <%
@@ -189,26 +212,36 @@
             }
             %>
         </select>
-        <span>Product Code : </span><input type="text" name="code" value = "P-23300" class = "form-control" />
+       
         <span>Brand Name : </span><input type="text" name="bname" class = "form-control" />
+        
         <span>Description Name : </span><input type="text" name="dname" class = "form-control" />
+        
         <span>Product Unit : </span>
         <select name="unit" class = "form-control" >
             <option>Select Product Unit</option>
             <option>Per Pieces</option>
             <option>Per Box</option>
             <option>Per Pack</option>
+            <option>Per KG</option>
         </select>
+        
         <span>Cost : </span><input type="text" name="cost" class = "form-control" />
+        
         <span>SRP : </span><input type="text" name="price"  class = "form-control" />
+        
         <span>Supplier : </span>
         <select name="supplier" class = "form-control">
             <option>Unilever</option>
             <option>Consuelo</option>
         </select>
+        
         <span>Quantity : </span><input type="text" name="qty" class = "form-control" />
+        
         <span>Date Delivered: </span><input type="date" name="date_del" class = "form-control" />
+        
         <span>Expiration Date: </span><input type="date" name="ex_date" class = "form-control" />
+        
         <span>&nbsp;</span><input class="btn btn-primary btn-block" type="submit" class = "form-control" value="Save" />
     </div>
     </form>

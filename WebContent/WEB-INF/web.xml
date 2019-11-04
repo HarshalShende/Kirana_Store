@@ -3,15 +3,35 @@
   <welcome-file-list>
     <welcome-file>login.html</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <servlet-name>TestBeforeResisterAdmin</servlet-name>
+    <servlet-class>servlets.TestBeforeResisterAdmin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TestBeforeResisterAdmin</servlet-name>
+    <url-pattern>/testbefreg</url-pattern>
+  </servlet-mapping>
+  
+  
+<session-config>
+    <session-timeout>
+        30
+    </session-timeout>
+</session-config>
 
-
-<servlet>
-<servlet-name>TestBeforeResisterAdmin</servlet-name>
-<servlet-class>servlets.TestBeforeResisterAdmin</servlet-class>
+<servlet>   
+           <servlet-name>registerSupplier</servlet-name>
+           <jsp-file>/registerSupplier.jsp</jsp-file>
+           <multipart-config>
+               <max-file-size>20848820</max-file-size>
+               <max-request-size>418018841</max-request-size>
+               <file-size-threshold>1048576</file-size-threshold>
+           </multipart-config>
 </servlet>
 <servlet-mapping>
-<servlet-name>TestBeforeResisterAdmin</servlet-name>
-<url-pattern>/testbefreg</url-pattern>
+            <servlet-name>registerSupplier</servlet-name>
+            <url-pattern>/registerSupplier</url-pattern>
 </servlet-mapping>
 
+  
 </web-app>
