@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.io.*" %>
     
 <!DOCTYPE html>
 <html lang="en-US">
@@ -7,7 +9,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Collapsible sidebar using Bootstrap 4</title>
+        <title>Kirana Store With GST</title>
         <!-- Bootstrap CSS CDN -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
         <!-- Our Custom CSS -->
@@ -21,6 +23,8 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> -->
     </head>
     <body>
+
+
         <nav class="navbar navbar-expand-lg navbar-light bg-dark sticky-top">
             <div class="container-fluid">
                 <h1><a href="#" class="navbar-brand font-weight-bold justify-content-start text-white"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Kirana Store With GST</a></h1>
@@ -124,48 +128,68 @@
                 </div>
             </div><br>
             <!----------------------------------------->
+            <% 
+                String connectionURL = "jdbc:mysql://localhost:3306/kiranastore";
+                String user = "root";
+                String pass = "";
+                     
+                Connection con = null;
+                     
+                try{
+                    Class.forName("com.mysql.jdbc.Driver");
+                    con = DriverManager.getConnection(connectionURL, user, pass);
+                        
+                    PreparedStatement ps = con.prepareStatement("SELECT * FROM suppliers");
+                    ResultSet rs = ps.executeQuery();
+                        
+        %>
             <div class="container-fluid" style="overflow:scroll;">
                 <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                     <thead>
-                        
-                        <th> Supplier </th>
-                        <th> Contact Person </th>
-                        <th> Address </th>
+                        <th> Name </th>
                         <th> Contact </th>
+                        <th> Address </th>
+                        <th>Image</th>
                         <th width="10%"> Action </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="record">
-                        <td>Consuelo</td>
-                        <td>rey</td>
-                        <td>Talisay City</td>
-                        <td align="right">441 3896</td>
+                    </tr>
+					<%
+					while(rs.next())
+					{
+					%>
+                    <tr class="record">
+                        <td class="text-dark"><%= rs.getString(2) %></td>
+                        <td class="text-dark" align="right"><%= rs.getString(3) %> </td>
+                        <td class="text-dark"><%= rs.getString(4)  %></td>
+                        <td>
+                        	<image src="getSupplierImage.jsp" alt="image Not Available" height="65" width="65px" />
+                        </td>
                         <td>
                             <a rel="facebox" class="btn btn-primary" href="editsupplier.php"><i class="fa fa-pencil-alt"></i>
                             </a>
                             <a href="#"class="btn btn-danger delbutton" title="Click To Delete"><i class = "fa fa-trash"></i></a>
                         </td>
                     </tr>
-                    <tr class="record">
-                        <td>Unilever</td>
-                        <td>dina</td>
-                        <td>Bacolod City</td>
-                        <td align="right">441 3251</td>
-                        <td>
-                            <a rel="facebox" class="btn btn-primary" href="editsupplier.php?id=1"><i class="fa fa-pencil-alt"></i></a>
-                            <a href="#" class="btn btn-danger delbutton" title="Click To Delete"><i class="fa fa-trash"></i></a>
-                        </td>
-                    </tr>
-                        
+                    <%
+					}
+                    %>
                     </tbody>
                 </table>
                 <div class="clearfix"></div>
             </div><br>
+
+            <%
+    }
+        catch(Exception e){e.printStackTrace();}
+    %>
             <a href="" onclick="window.print()" class="btn btn-primary"><i class="fa fa-print"></i> Print</a>
             <div class="clearfix"></div>
         </div>
     </div>
+    
     
     
     <!-- Modal For Supplier Registration Form -->
