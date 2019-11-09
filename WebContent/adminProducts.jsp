@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+pageEncoding="ISO-8859-1"%>
 <%@ page import="java.sql.*" %>
 <!DOCTYPE html>
 <html lang="en-US">
@@ -27,6 +27,14 @@
         </script>
     </head>
     <body>
+        <%
+        String connectionURL = "jdbc:mysql://localhost:3306/kiranastore";
+        String user = "root";
+        String pass = "";
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con=DriverManager.getConnection(connectionURL, user, pass);
+        %>
+        
         <nav class="navbar navbar-expand-lg navbar-light bg-dark sticky-top">
             <div class="container-fluid">
                 <h1><a href="#" class="navbar-brand font-weight-bold justify-content-start text-white"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Kirana Store With GST</a></h1>
@@ -62,16 +70,19 @@
                             <i class="fa fa-table fa-fw" ></i> Products
                         </a>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-user fa-fw" ></i> Customer
-                        </a>
-                    </li>
+                    
                     <li>
                         <a href="adminSupplier.jsp">
                             <i class="fa fa-truck fa-fw" ></i> Supplier
                         </a>
                     </li>
+                    
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-user fa-fw" ></i> Customer
+                        </a>
+                    </li>
+                    
                     <li>
                         <a href="#">
                             <i class="fa fa-list-alt fa-fw" ></i> Customer Ledger
@@ -103,8 +114,8 @@
             
             <!-- Page Content  -->
             <div id="content">
-              <!----------------------------------------->
-                <div class="row" style="text-align:right;">
+                <!----------------------------------------->
+                <!-- <div class="row" style="text-align:right;">
                     <div class="col-lg-4 col-sm-4">
                         <div class="dataTables_length" id="dataTables-example_length">
                             <label>Show entries</label>
@@ -121,173 +132,167 @@
                         <input type="search" class="form-control input-sm" placeholder="" aria-controls="dataTables-example">
                     </div>
                 </div>
-            </div><br>
+            </div><br> -->
             <!----------------------------------------->
             
-                <div class="container-fluid">
-                    <h4 class="text-primary"><i class="fa fa-th-list fa-fw"></i> Product List</h4>
-                    <button type="submit" class="btn btn-primary " data-target="#addProdModal" data-toggle="modal">
-                    <i class="fa fa-plus"></i>Add Products
-                    </button>&nbsp;&nbsp;
-                    <button type="submit" class="btn btn-primary " data-target="#addCatModal" data-toggle="modal">
-                    <i class="fa fa-plus"></i>Add Category
-                    </button>&nbsp;&nbsp;
-                </div>
-                <br>
-                <div class="container" style="overflow:scroll;">
-                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-                        <thead>
-                            <tr>
-                                <th> Code </th>
-                                <th> Brand Name </th>
-                                <th> Description </th>
-                                <th> Category </th>
-                                <th> Cost </th>
-                                <th> SRP </th>
-                                <th> Supplier </th>
-                                <th witdh = "10%"> Quantity Left </th>
-                                <th witdh = "10%"> Product Unit </th>
-                                <th> Action </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="record">
-                                <td>P-08</td>
-                                <td>Century Tuna</td>
-                                <td>ADOBO</td>
-                                <td>Noodles</td>
-                                <td align="right">30.00</td>
-                                <td align="right">33.00</td>
-                                <td>Consuelo</td>
-                                <td align="right">99</td>
-                                <td >Per Pieces</td>
-                                <td><a rel="facebox" class = "btn btn-primary" href="editproduct.php?id=1">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                <!--   <a href="#" id="1" class="btn btn-danger delbutton" title="Click To Delete">
-                                    <i class="fa fa-trash"></i>
-                                </a> -->
-                            </td>
+            <div class="container-fluid">
+                <h4 class="text-primary"><i class="fa fa-th-list fa-fw"></i> Product List</h4>
+                <button type="submit" class="btn btn-primary " data-target="#addProdModal" data-toggle="modal">
+                <i class="fa fa-plus"></i>Add Products
+                </button>&nbsp;&nbsp;
+                <button type="submit" class="btn btn-primary " data-target="#addCatModal" data-toggle="modal">
+                <i class="fa fa-plus"></i>Add Category
+                </button>&nbsp;&nbsp;
+            </div>
+            <br>
+            <div class="container" style="overflow:scroll;">
+                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th> Code </th>
+                            <th> Brand Name </th>
+                            <th> Description </th>
+                            <th> Category </th>
+                            <th> Cost </th>
+                            <th> SRP </th>
+                            <th> Supplier </th>
+                            <th witdh = "10%"> Quantity Left </th>
+                            <th witdh = "10%"> Product Unit </th>
+                            <th>Image</th>
+                            <th> Action </th>
                         </tr>
-                        
-</tbody>
-</table>
-
-</div>
-
-<a href="" onclick="window.print()" class="btn btn-primary"><i class="fa fa-print"></i> Print</a>
-                    <a href= "product_exp.php" class = "btn btn-primary">View Product Expiration</a>
-                        <div class="clearfix"></div>
-
-
-</div>
+                    </thead>
+                    <tbody>
+                        <tr class="record">
+                            <td>P-08</td>
+                            <td>Century Tuna</td>
+                            <td>ADOBO</td>
+                            <td>Noodles</td>
+                            <td align="right">30.00</td>
+                            <td align="right">33.00</td>
+                            <td>Consuelo</td>
+                            <td align="right">99</td>
+                            <td >Per Pieces</td>
+                            <td>
+                            	<image src="getSupplierImage.jsp" alt="image Not Available" height="65" width="65px" />
+                          	</td>
+	                        <td>
+	                            <a rel="facebox" class="btn btn-primary" href="editsupplier.php"><i class="fa fa-pencil-alt"></i>
+	                            </a>
+	                            <a href="#"class="btn btn-danger delbutton" title="Click To Delete"><i class = "fa fa-trash"></i></a>
+	                        </td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+        <a href="" onclick="window.print()" class="btn btn-primary"><i class="fa fa-print"></i> Print</a>
+        <a href= "product_exp.php" class = "btn btn-primary">View Product Expiration</a>
+        <div class="clearfix"></div>
+    </div>
 </div>
 <div class="modal fade" id="addProdModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-<div class="modal-header">
-<h4 class="modal-title" id="myModalLabel">Add Product</h4>
-<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-</div>
-<div class="modal-body">
-<form action="addProducts.jsp" method="post" class = "form-group" >
-    <div id="ac">
-    
-    	<span>Product Code : </span><input type="text" name="code" value = "P-23300" class = "form-control" />
-    	
-        <span>Category: </span>
-        <select name="categ" class = "form-control" >
-            <%
-            String connectionURL = "jdbc:mysql://localhost:3306/kiranastore";
-            String user = "root";
-            String pass = "";
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con=DriverManager.getConnection(connectionURL, user, pass);
-            Statement st=con.createStatement();
-            ResultSet rs=st.executeQuery("select * from categories");
-            while(rs.next()){
-            %>
-            <option><%= rs.getString(2) %></option>
-            <%
-            }
-            %>
-        </select>
-       
-        <span>Brand Name : </span><input type="text" name="bname" class = "form-control" />
-        
-        <span>Description Name : </span><input type="text" name="dname" class = "form-control" />
-        
-        <span>Product Unit : </span>
-        <select name="unit" class = "form-control" >
-            <option>Select Product Unit</option>
-            <option>Per Pieces</option>
-            <option>Per Box</option>
-            <option>Per Pack</option>
-            <option>Per KG</option>
-        </select>
-        
-        <span>Cost : </span><input type="text" name="cost" class = "form-control" />
-        
-        <span>SRP : </span><input type="text" name="price"  class = "form-control" />
-        
-        <span>Supplier : </span>
-        <select name="supplier" class = "form-control">
-            <option>Unilever</option>
-            <option>Consuelo</option>
-        </select>
-        
-        <span>Quantity : </span><input type="text" name="qty" class = "form-control" />
-        
-        <span>Date Delivered: </span><input type="date" name="date_del" class = "form-control" />
-        
-        <span>Expiration Date: </span><input type="date" name="ex_date" class = "form-control" />
-        
-        <span>&nbsp;</span><input class="btn btn-primary btn-block" type="submit" class = "form-control" value="Save" />
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Add Product</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form action="addProducts" method="post" class = "form-group" enctype="multipart/form-data">
+                    <div id="ac">
+                        
+                        <span>Product Name : </span><input type="text" name="name" class = "form-control" />
+                        
+                        <span>Category: </span>
+                        <select name="categ" class = "form-control" >
+                        	<option>Select Category</option>
+                            <%
+                            Statement st1=con.createStatement();
+                            ResultSet rs1=st1.executeQuery("select * from categories");
+                            while(rs1.next()){
+                            %>
+                            <option><%= rs1.getString(2) %></option>
+                            <%
+                            }
+                            %>
+                        </select>
+                        
+                        <span>Product Description : </span><input type="text" name="desc" class = "form-control" />
+                        
+                        <span>Product Unit : </span>
+                        <select name="unit" class = "form-control" >
+                            <option>Select Product Unit</option>
+                            <option>Per Pieces</option>
+                            <option>Per Box</option>
+                            <option>Per Pack</option>
+                            <option>Per KG</option>
+                        </select>
+                        
+                        <span>Price : </span><input type="text" name="price" class = "form-control" />
+                        
+                        <span>Supplier : </span>
+                        <select name="supplier" class = "form-control">
+                            <option>Select Supplier</option>
+                            <%
+                            Statement st2=con.createStatement();
+                            ResultSet rs2=st2.executeQuery("select * from suppliers");
+                            while(rs2.next()){
+                            %>
+                            <option><%= rs2.getString("name") %></option>
+                            <%
+                            }
+                            %>
+                        </select>
+                        
+                        <span>Quantity : </span><input type="text" name="qty" class = "form-control" />
+                        
+                        <span>Date Delivered: </span><input type="date" name="date_del" class = "form-control" />
+                        
+                        <span>Expiration Date: </span><input type="date" name="ex_date" class = "form-control" />
+                        
+                        <span>Upload Image:</span> <input type="file" name="image" class="form-control">
+                        
+                        <span>&nbsp;</span><input class="btn btn-primary btn-block" type="submit" class = "form-control" value="Save" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+        <!-- /.modal-content -->
     </div>
-    </form>
-</div>
-<div class="modal-footer">
-</div>
-</div>
-<!-- /.modal-content -->
-</div>
-<!-- /.modal-dialog -->
+    <!-- /.modal-dialog -->
 </div>
 <!-- modal end  -->
-
-
-
- <!-- Add Category Modal -->
+<!-- Add Category Modal -->
 <div class="modal fade" id="addCatModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-<div class="modal-header">
-    <h4 class="modal-title" id="myModalLabel">Add Category</h4>
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-</div>
-<div class="modal-body">
-    <form action="addCategory.jsp" method="post" class = "form-group" >
-        <div id="ac">
-            <span>Category : </span>
-            <input type="text" name="category" class = "form-control" />
-            <span>&nbsp;</span>
-            <input class="btn btn-primary btn-block" type="submit" class ="form-control" value="Save" />
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Add Category</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form action="addCategory.jsp" method="post" class = "form-group" >
+                    <div id="ac">
+                        <span>Category : </span>
+                        <input type="text" name="category" class = "form-control" />
+                        <span>&nbsp;</span>
+                        <input class="btn btn-primary btn-block" type="submit" class ="form-control" value="Save" />
+                    </div>
+                </form>
+            </div>
+            
+            <div class="modal-footer">
+            </div>
         </div>
-    </form>
+        <!-- /.modal-content -->
     </div>
-    
-    <div class="modal-footer">
-    </div>
-</div>
-<!-- /.modal-content -->
-</div>
-<!-- /.modal-dialog -->
+    <!-- /.modal-dialog -->
 </div>
 <!-- Modal -->
 <!-- modal end  -->
-
-
-
 <!-- jQuery CDN - Slim version (=without AJAX) -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <!-- Popper.JS -->

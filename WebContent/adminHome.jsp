@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    
+pageEncoding="ISO-8859-1"%>
+
 <%@page import="java.io.PrintWriter" %>
 <%@page import="java.util.*" %>
 <!DOCTYPE html>
@@ -54,16 +54,19 @@
                             <i class="fa fa-table fa-fw" ></i> Products
                         </a>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-user fa-fw" ></i> Customer
-                        </a>
-                    </li>
+                    
                     <li>
                         <a href="adminSupplier.jsp">
                             <i class="fa fa-truck fa-fw" ></i> Supplier
                         </a>
                     </li>
+                    
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-user fa-fw" ></i> Customer
+                        </a>
+                    </li>
+                    
                     <li>
                         <a href="#">
                             <i class="fa fa-list-alt fa-fw" ></i> Customer Ledger
@@ -98,30 +101,30 @@
                     <h4 class="text-primary page-item">
                     <img src="getAdminImage.jsp" class="rounded-circle rounded" alt="Admin Picture" height="65" width="65px">
                     &nbsp;&nbsp; Welcome Admin &nbsp;&nbsp;
-                    <strong class="text-danger text-center"><%= session.getAttribute("name")%></strong> 
+                    <strong class="text-danger text-center"><%= session.getAttribute("name")%></strong>
                     </h4>
                     <br><br>
                     <div id="orayt">
                         <a class="list-group-item">
-                           <font style = 'color:black;'>Total Sales For Today:  </font>
+                            <font style = 'color:black;'>Total Sales For Today:  </font>
                             <span class="badge float-right">
-                            <%= (new java.util.Date()).toLocaleString()%>
+                                <%= (new java.util.Date()).toLocaleString()%>
                             </span>
                         </a>
                         <a class="list-group-item" href ="view_productqty.php">Re-Order
-                        <span class="badge float-right">
-                            1                   
-                        </span>
+                            <span class="badge float-right">
+                                1
+                            </span>
                         </a>
-                        <a class="list-group-item" href ="view_customer.php">Credit 
-                        <span class="badge float-right">
+                        <a class="list-group-item" href ="view_customer.php">Credit
+                            <span class="badge float-right">
                                 [0]  2019-10-20
-                        </span>
+                            </span>
                         </a>
-                        <a class="list-group-item" href ="view_exproduct.php">Product Expiration  
-                        <span class="badge float-right">
+                        <a class="list-group-item" href ="view_exproduct.php">Product Expiration
+                            <span class="badge float-right">
                                 [0]  2019-10-20
-                        </span>
+                            </span>
                         </a>
                         <!--<a class="list-group-item"  href ="view_overdue.php">
                             Overdue <span class="badge">

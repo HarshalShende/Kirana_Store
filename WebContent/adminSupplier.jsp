@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+pageEncoding="ISO-8859-1"%>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.io.*" %>
-    
+
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
@@ -23,8 +23,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> -->
     </head>
     <body>
-
-
         <nav class="navbar navbar-expand-lg navbar-light bg-dark sticky-top">
             <div class="container-fluid">
                 <h1><a href="#" class="navbar-brand font-weight-bold justify-content-start text-white"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;Kirana Store With GST</a></h1>
@@ -61,15 +59,16 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="fa fa-user fa-fw" ></i> Customer
-                        </a>
-                    </li>
-                    <li>
                         <a href="adminSupplier.jsp">
                             <i class="fa fa-truck fa-fw" ></i> Supplier
                         </a>
                     </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-user fa-fw" ></i> Customer
+                        </a>
+                    </li>
+                    
                     <li>
                         <a href="#">
                             <i class="fa fa-list-alt fa-fw" ></i> Customer Ledger
@@ -109,7 +108,7 @@
                 </div>
                 <br>
                 <!----------------------------------------->
-                <div class="row" style="text-align:right;">
+                <!-- <div class="row" style="text-align:right;">
                     <div class="col-lg-4 col-sm-4">
                         <div class="dataTables_length" id="dataTables-example_length">
                             <label>Show entries</label>
@@ -126,23 +125,23 @@
                         <input type="search" class="form-control input-sm" placeholder="" aria-controls="dataTables-example">
                     </div>
                 </div>
-            </div><br>
+            </div><br> -->
             <!----------------------------------------->
-            <% 
-                String connectionURL = "jdbc:mysql://localhost:3306/kiranastore";
-                String user = "root";
-                String pass = "";
-                     
-                Connection con = null;
-                     
-                try{
-                    Class.forName("com.mysql.jdbc.Driver");
-                    con = DriverManager.getConnection(connectionURL, user, pass);
-                        
-                    PreparedStatement ps = con.prepareStatement("SELECT * FROM suppliers");
-                    ResultSet rs = ps.executeQuery();
-                        
-        %>
+            <%
+            String connectionURL = "jdbc:mysql://localhost:3306/kiranastore";
+            String user = "root";
+            String pass = "";
+            
+            Connection con = null;
+            
+            try{
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection(connectionURL, user, pass);
+            
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM suppliers");
+            ResultSet rs = ps.executeQuery();
+            
+            %>
             <div class="container-fluid" style="overflow:scroll;">
                 <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                     <thead>
@@ -154,18 +153,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="record">
-                    </tr>
-					<%
-					while(rs.next())
-					{
-					%>
+                    <%
+
+                    while(rs.next())
+                    {
+                    %>
                     <tr class="record">
                         <td class="text-dark"><%= rs.getString(2) %></td>
                         <td class="text-dark" align="right"><%= rs.getString(3) %> </td>
                         <td class="text-dark"><%= rs.getString(4)  %></td>
                         <td>
-                        	<image src="getSupplierImage.jsp" alt="image Not Available" height="65" width="65px" />
+                            <image src="getSupplierImage.jsp?id=<%=rs.getInt(1)%>" alt="image Not Available" height="65" width="65px" />
                         </td>
                         <td>
                             <a rel="facebox" class="btn btn-primary" href="editsupplier.php"><i class="fa fa-pencil-alt"></i>
@@ -174,68 +172,67 @@
                         </td>
                     </tr>
                     <%
-					}
+                    }
                     %>
-                    </tbody>
-                </table>
-                <div class="clearfix"></div>
-            </div><br>
-
-            <%
-    }
-        catch(Exception e){e.printStackTrace();}
-    %>
-            <a href="" onclick="window.print()" class="btn btn-primary"><i class="fa fa-print"></i> Print</a>
+                </tbody>
+            </table>
             <div class="clearfix"></div>
-        </div>
+        </div><br>
+        <%
+        }
+        catch(Exception e){e.printStackTrace();}
+        %>
+        <a href="" onclick="window.print()" class="btn btn-primary"><i class="fa fa-print"></i> Print</a>
+        <div class="clearfix"></div>
     </div>
-    
-    
-    
-    <!-- Modal For Supplier Registration Form -->
-    <div class="modal fade" id="addsupplier" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Add Supplier</h4>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">X</button>
-                </div>
-                <div class="modal-body">
-                    <form action="registerSupplier" method="post" class = "form-group" enctype="multipart/form-data">
-                            <span>Supplier Name : </span>
-                            <input type="text" name="name" class = "form-control" />
-                            <span>Contact Number : </span>
-                            <input type="text" name="contact" class = "form-control" />
-                            <span>Address : </span>
-                            <input type="text" name="address" class = "form-control" />
-                            <span>Upload Image:</span>
-                            <input type="file" name="image" class="form-control">
-                            <span>&nbsp;</span>
-                            <input class="btn btn-primary btn-block" name="reg"  type="submit" value="save" class = "form-control" />
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    
-                </div>
+</div>
+
+
+
+<!-- Modal For Supplier Registration Form -->
+<div class="modal fade" id="addsupplier" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Add Supplier</h4>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">X</button>
             </div>
-            <!-- /.modal-content -->
+            <div class="modal-body">
+                <form action="registerSupplier" method="post" class = "form-group" enctype="multipart/form-data">
+                    <span>Supplier Name : </span>
+                    <input type="text" name="name" class = "form-control" />
+                    <span>Contact Number : </span>
+                    <input type="text" name="contact" class = "form-control" />
+                    <span>Address : </span>
+                    <input type="text" name="address" class = "form-control" />
+                    <span>Upload Image:</span>
+                    <input type="file" name="image" class="form-control">
+                    <span>&nbsp;</span>
+                    <input class="btn btn-primary btn-block" name="reg"  type="submit" value="save" class = "form-control" />
+                </form>
+            </div>
+            <div class="modal-footer">
+                
+            </div>
         </div>
-        <!-- /.modal-dialog -->
+        <!-- /.modal-content -->
     </div>
-    <!-- /.modal -->
-    
-    <!-- jQuery CDN - Slim version (=without AJAX) -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <!-- Popper.JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-    $(document).ready(function () {
-    $('#sidebarCollapse').on('click', function () {
-    $('#sidebar').toggleClass('active');
-    });
-    });
-    </script>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- jQuery CDN - Slim version (=without AJAX) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!-- Popper.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+$('#sidebarCollapse').on('click', function () {
+$('#sidebar').toggleClass('active');
+});
+});
+</script>
 </body>
 </html>

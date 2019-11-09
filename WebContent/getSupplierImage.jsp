@@ -12,13 +12,16 @@ String connectionURL = "jdbc:mysql://localhost:3306/kiranastore";
 String user = "root";
 String pass = "";
  
+String id=request.getParameter("id");
+
 Connection con = null;
  
 try{
     Class.forName("com.mysql.jdbc.Driver");
     con = DriverManager.getConnection(connectionURL, user, pass);
     
-    PreparedStatement ps = con.prepareStatement("select * from suppliers");
+    PreparedStatement ps = con.prepareStatement("select * from suppliers where id=?");
+    ps.setString(1, id);
     ResultSet rs = ps.executeQuery();
  
     if(rs.next()){
