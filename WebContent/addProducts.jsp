@@ -29,21 +29,7 @@ String ex_date=request.getParameter("ex_date");
 Part image=request.getPart("image");
 InputStream is =image.getInputStream();
 
-PreparedStatement ps=con.prepareStatement(""+
-		"INSERT INTO `products`("+
-			    "`product_name`,"+
-			    "`category`,"+
-			    "`description`,"+
-			    "`unit`,"+
-			    "`price`,"+
-			    "`supplier`,"+
-			    "`qty_left`,"+
-			    "`date_delivered`,"+
-			    "`expiration_date`"+
-			    "`image`"+
-			")"+
-			"VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"+
-			"");
+PreparedStatement ps=con.prepareStatement("INSERT INTO `products`(`product_name`, `category`, `description`, `unit`, `price`, `supplier`, `qty_left`, `date_delivered`, `expiration_date`, `image`) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
 ps.setString(1,name);
 ps.setString(2, categ);
@@ -58,17 +44,19 @@ ps.setBlob(10, is);
 
 int k=ps.executeUpdate();
 
-RequestDispatcher rd=request.getRequestDispatcher("adminProducts.jsp");
+
 if(k!=0){
-	rd.include(request,response);
+	response.sendRedirect("adminProducts.jsp");
 	out.println("<script type=\"text/javascript\">");
     out.println("confirm('Product Inserted Successfully');");
+    out.println("location='index.jsp';");
 	out.println("</script>");
 }
 else{
-	rd.include(request,response);
+	response.sendRedirect("adminProducts.jsp");
 	out.println("<script type=\"text/javascript\">");
     out.println("confirm('Product Not Inserted');");
+    out.println("location='index.jsp';");
 	out.println("</script>");
 }
 

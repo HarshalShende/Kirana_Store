@@ -145,43 +145,58 @@ pageEncoding="ISO-8859-1"%>
                 </button>&nbsp;&nbsp;
             </div>
             <br>
+            
+            <%
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM products");
+            ResultSet rs = ps.executeQuery();
+            
+            %>
+            
             <div class="container" style="overflow:scroll;">
                 <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                     <thead>
                         <tr>
-                            <th> Code </th>
-                            <th> Brand Name </th>
-                            <th> Description </th>
+                            <th> Product Name </th>
                             <th> Category </th>
-                            <th> Cost </th>
-                            <th> SRP </th>
+                            <th> Description </th>
+                            <th> Unit </th>
+                            <th> Price </th>
                             <th> Supplier </th>
                             <th witdh = "10%"> Quantity Left </th>
-                            <th witdh = "10%"> Product Unit </th>
+                            <th witdh = "10%"> Date Of Delivery </th>
+                            <th witdh = "10%"> Date Of Expiration </th>
                             <th>Image</th>
                             <th> Action </th>
                         </tr>
                     </thead>
                     <tbody>
+                     <%
+
+                    while(rs.next())
+                    { 
+                    %>
                         <tr class="record">
-                            <td>P-08</td>
-                            <td>Century Tuna</td>
-                            <td>ADOBO</td>
-                            <td>Noodles</td>
-                            <td align="right">30.00</td>
-                            <td align="right">33.00</td>
-                            <td>Consuelo</td>
-                            <td align="right">99</td>
-                            <td >Per Pieces</td>
+                            <td><%= rs.getString(2) %></td>
+                            <td><%= rs.getString(3) %></td>
+                            <td><%= rs.getString(4) %></td>
+                            <td><%= rs.getString(5) %></td>
+                            <td align="right"><%= rs.getString(6) %></td>
+                            <td align="right"><%= rs.getString(7) %></td>
+                            <td><%= rs.getInt(8) %></td>
+                            <td align="right"><%= rs.getString(9) %></td>
+                            <td ><%= rs.getString(10) %></td>
                             <td>
-                            	<image src="getSupplierImage.jsp" alt="image Not Available" height="65" width="65px" />
+                            	<image src="getProductsImage.jsp?id=<%=rs.getInt(1)%>" alt="image Not Available" height="65" width="65px" />
                           	</td>
 	                        <td>
-	                            <a rel="facebox" class="btn btn-primary" href="editsupplier.php"><i class="fa fa-pencil-alt"></i>
+	                            <a rel="facebox" class="btn btn-primary" data-target="#addProdModal" data-toggle="modal"><i class="fa fa-pencil-alt"></i>
 	                            </a>
 	                            <a href="#"class="btn btn-danger delbutton" title="Click To Delete"><i class = "fa fa-trash"></i></a>
 	                        </td>
                     </tr>
+                    <%
+                    }
+                    %>
                     
                 </tbody>
             </table>

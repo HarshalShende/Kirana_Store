@@ -47,19 +47,18 @@ else{
 	    
 
     if(k==0) {
-    	RequestDispatcher rd2=request.getRequestDispatcher("adminSupplier.jsp");
-    	rd2.include(request,response);
+    	
     	pw.println("<script type=\"text/javascript\">");
 	    pw.println("alert('Suppier Registration Failed');");
 		pw.println("</script>");
-    	
+		response.sendRedirect("adminSupplier.jsp");
     	
     }else {
-    	RequestDispatcher rd3=request.getRequestDispatcher("adminSupplier.jsp");
-    	rd3.include(request,response);
+    	
     	pw.println("<script type=\"text/javascript\">");
 	    pw.println("alert('Suppier Registration Failed');");
 		pw.println("</script>");
+		response.sendRedirect("adminSupplier.jsp");
     }
 }
 

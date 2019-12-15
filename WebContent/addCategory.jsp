@@ -23,20 +23,16 @@ PreparedStatement ps=con.prepareStatement("insert into categories(category) valu
 ps.setString(1, category);
 int k=ps.executeUpdate();
 if(k!=0){
-	PrintWriter pw=response.getWriter();
-	RequestDispatcher rd=request.getRequestDispatcher("adminProducts.jsp");
-	rd.include(request,response);
-	pw.println("<script type=\"text/javascript\">");
-    pw.println("confirm('Category Added');");
-	pw.println("</script>");
+	response.sendRedirect("adminSupplier.jsp");
+	out.println("<script type=\"text/javascript\">");
+    out.println("confirm('Category Added');");
+	out.println("</script>");
 }
 else{
-	PrintWriter pw=response.getWriter();
-	RequestDispatcher rd=request.getRequestDispatcher("adminProducts.jsp");
-	rd.include(request,response);
-	pw.println("<script type=\"text/javascript\">");
-    pw.println("confirm('Category Not Added');");
-	pw.println("</script>");
+	response.sendRedirect("adminSupplier.jsp");
+	out.println("<script type=\"text/javascript\">");
+    out.println("confirm('Category Not Added');");
+	out.println("</script>");
 }
 %>
 

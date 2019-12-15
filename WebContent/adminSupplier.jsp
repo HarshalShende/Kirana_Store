@@ -198,7 +198,7 @@ pageEncoding="ISO-8859-1"%>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">X</button>
             </div>
             <div class="modal-body">
-                <form action="registerSupplier" method="post" class = "form-group" enctype="multipart/form-data">
+                <form action="registerSupplier" method="post" class = "form-group"  >
                     <span>Supplier Name : </span>
                     <input type="text" name="name" class = "form-control" />
                     <span>Contact Number : </span>
